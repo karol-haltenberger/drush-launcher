@@ -30,6 +30,7 @@ else {
 $DRUSH_LAUNCHER_VERSION = '@git-version@';
 
 $ROOT = FALSE;
+$DOCROOT = FALSE;
 $DEBUG = FALSE;
 $VAR = FALSE;
 $VERSION = FALSE;
@@ -50,6 +51,9 @@ foreach ($_SERVER['argv'] as $arg) {
     switch ($arg) {
       case "-r":
         $VAR = "ROOT";
+        break;
+      case "--docroot":
+        $DOCROOT = TRUE;
         break;
       case "--debug":
         $DEBUG = TRUE;
@@ -130,6 +134,11 @@ if ($drupalFinder->locateRoot($ROOT)) {
     unset($xdebug);
   }
 
+  if ($DOCROOT) {
+    echo $drupalRoot . PHP_EOL;
+    exit(0);
+  }
+
   if ($DEBUG) {
     echo "DRUSH VERSION: " . $DRUSH_VERSION . PHP_EOL;
     echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
@@ -160,6 +169,11 @@ if ($drupalFinder->locateRoot($ROOT)) {
     echo 'Run \'cd "' . $drupalFinder->getComposerRoot() . '" && composer require drush/drush\'' . PHP_EOL;
     exit(1);
   }
+}
+
+//Output nothing if drupal not found
+if ($DOCROOT) {
+  exit(1);
 }
 
 if ($FALLBACK) {
