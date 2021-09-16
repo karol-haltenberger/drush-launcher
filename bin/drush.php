@@ -135,7 +135,7 @@ if ($drupalFinder->locateRoot($ROOT)) {
   }
 
   if ($DOCROOT) {
-    echo $drupalRoot;
+    echo $drupalRoot . PHP_EOL;
     exit(0);
   }
 
@@ -173,7 +173,7 @@ if ($drupalFinder->locateRoot($ROOT)) {
 
 //Output nothing if drupal not found
 if ($DOCROOT) {
-  exit(1);
+  exit();
 }
 
 if ($FALLBACK) {
