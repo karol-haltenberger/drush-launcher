@@ -135,7 +135,7 @@ if ($drupalFinder->locateRoot($ROOT)) {
   }
 
   if ($DOCROOT) {
-    echo $drupalRoot . PHP_EOL;
+    echo $drupalRoot;
     exit(0);
   }
 
